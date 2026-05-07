@@ -1,0 +1,2238 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Marketing Co-Build 1:1 · Truyen Nguyen</title>
+<meta name="description" content="Học cách dùng Claude xây hệ thống marketing cho use case cụ thể của bạn. Chương trình đồng hành 5 buổi 1:1.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --copper: #C4704B;
+  --copper-hover: #B05E3D;
+  --terracotta: #D4956A;
+  --cream: #FAF6F1;
+  --tan: #E8DDD3;
+  --tan-light: #F2EBE2;
+  --charcoal: #2D2D2D;
+  --charcoal-soft: #4A4A4A;
+  --muted: #7A7A7A;
+  --white: #FFFFFF;
+  --border: #E5DCD0;
+  --success: #6B8E5A;
+  --error: #C45A4B;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--charcoal);
+  background: var(--cream);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===== Announcement bar ===== */
+.announcement {
+  background: var(--charcoal);
+  color: var(--cream);
+  text-align: center;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.announcement strong { color: var(--terracotta); }
+
+/* ===== Nav ===== */
+nav.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(250, 246, 241, 0.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.brand {
+  font-weight: 700;
+  font-size: 17px;
+  color: var(--charcoal);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.brand-mark {
+  width: 28px; height: 28px;
+  background: var(--copper);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 800;
+  font-size: 14px;
+}
+.nav-links {
+  display: flex;
+  gap: 28px;
+  align-items: center;
+  list-style: none;
+}
+.nav-links a {
+  color: var(--charcoal-soft);
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+}
+.nav-links a:hover { color: var(--copper); }
+
+.btn {
+  display: inline-block;
+  padding: 12px 22px;
+  background: var(--copper);
+  color: white;
+  text-decoration: none;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 15px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.btn:hover { background: var(--copper-hover); }
+.btn-large {
+  padding: 18px 36px;
+  font-size: 17px;
+  border-radius: 12px;
+}
+.btn-outline {
+  background: transparent;
+  color: var(--charcoal);
+  border: 2px solid var(--charcoal);
+}
+.btn-outline:hover { background: var(--charcoal); color: white; }
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+}
+
+/* ===== Container ===== */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.narrow {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ===== Section base ===== */
+section {
+  padding: 80px 0;
+}
+section.alt-bg { background: var(--tan-light); }
+section.dark-bg {
+  background: var(--charcoal);
+  color: var(--cream);
+}
+
+@media (max-width: 768px) {
+  section { padding: 56px 0; }
+}
+
+/* ===== Hero ===== */
+.hero {
+  padding: 56px 0 80px;
+  background: linear-gradient(180deg, var(--cream) 0%, var(--tan-light) 100%);
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 56px;
+  align-items: center;
+}
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+}
+.eyebrow-tag {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--copper);
+  margin-bottom: 22px;
+  text-transform: uppercase;
+}
+h1 {
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--charcoal);
+  margin-bottom: 24px;
+}
+.hero-intro {
+  font-size: 17px;
+  margin-top: 16px;
+  margin-bottom: 14px;
+  color: var(--charcoal);
+  font-weight: 600;
+}
+.hero-bullets {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 24px;
+}
+.hero-bullets li {
+  padding: 10px 0 10px 36px;
+  position: relative;
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--charcoal-soft);
+}
+.hero-bullets li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 11px;
+  width: 22px;
+  height: 22px;
+  background: var(--success);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+}
+.hero-closer {
+  font-size: 16px;
+  color: var(--charcoal-soft);
+  margin-bottom: 28px;
+  line-height: 1.65;
+}
+.hero-cta {
+  margin-top: 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.hero-cta-meta {
+  font-size: 14px;
+  color: var(--muted);
+  margin-top: 12px;
+}
+.hero-photo {
+  position: relative;
+  padding: 0 16px 16px 0;
+}
+.hero-photo::before {
+  content: "";
+  position: absolute;
+  top: 16px;
+  right: 0;
+  bottom: 0;
+  left: 16px;
+  background: var(--charcoal);
+  border-radius: 16px;
+  z-index: 0;
+}
+.hero-photo img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  display: block;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+}
+.hero-photo-placeholder {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  aspect-ratio: 3/4;
+  background: var(--tan);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--charcoal-soft);
+  font-size: 14px;
+  text-align: center;
+  padding: 24px;
+  border: 2px dashed var(--border);
+}
+.hero-photo-caption {
+  text-align: center;
+  margin-top: 24px;
+  font-size: 14px;
+  color: var(--muted);
+  font-style: italic;
+}
+
+@media (max-width: 768px) {
+  h1 { font-size: 34px; }
+  .hero-intro { font-size: 15px; }
+  .hero-bullets li { font-size: 15px; }
+}
+
+/* ===== Scroll-to-top button ===== */
+#scroll-top {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 44px;
+  height: 44px;
+  border: none;
+  background: var(--copper);
+  color: white;
+  border-radius: 50%;
+  font-size: 22px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(196, 112, 75, 0.35);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s, transform 0.2s, background 0.2s;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+#scroll-top.visible {
+  opacity: 1;
+  visibility: visible;
+}
+#scroll-top:hover {
+  background: var(--copper-hover);
+  transform: translateY(-2px);
+}
+
+/* ===== Section header ===== */
+.section-label {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--copper);
+  margin-bottom: 16px;
+}
+h2 {
+  font-size: 38px;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  color: var(--charcoal);
+  margin-bottom: 24px;
+  max-width: 820px;
+}
+h3 {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--charcoal);
+  margin-bottom: 12px;
+}
+.lead {
+  font-size: 19px;
+  line-height: 1.6;
+  color: var(--charcoal-soft);
+  max-width: 720px;
+  margin-bottom: 32px;
+}
+p { margin-bottom: 18px; }
+p:last-child { margin-bottom: 0; }
+
+@media (max-width: 768px) {
+  h2 { font-size: 28px; }
+  h3 { font-size: 19px; }
+}
+
+/* ===== Cards ===== */
+.card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 28px;
+}
+.card-grid {
+  display: grid;
+  gap: 20px;
+}
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 900px) {
+  .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  .grid-2 { grid-template-columns: 1fr; }
+}
+
+.card-num {
+  width: 36px; height: 36px;
+  background: var(--copper);
+  color: white;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 16px;
+  margin-bottom: 16px;
+}
+.card-num-dark { background: var(--charcoal); }
+
+/* ===== Pain narrative ===== */
+.pain-list p {
+  font-size: 17px;
+  line-height: 1.75;
+  color: var(--charcoal-soft);
+  margin-bottom: 22px;
+}
+
+.callout {
+  background: var(--white);
+  border-left: 4px solid var(--copper);
+  padding: 22px 26px;
+  border-radius: 8px;
+  margin: 28px 0;
+  font-style: italic;
+  font-size: 18px;
+  color: var(--charcoal);
+  font-weight: 500;
+}
+
+/* ===== Two columns comparison ===== */
+.compare-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 32px;
+}
+@media (max-width: 768px) {
+  .compare-grid { grid-template-columns: 1fr; }
+}
+.compare-col {
+  padding: 32px;
+  border-radius: 14px;
+}
+.compare-bad {
+  background: var(--tan-light);
+  border: 1px solid var(--border);
+}
+.compare-good {
+  background: var(--charcoal);
+  color: var(--cream);
+}
+.compare-good h3 { color: var(--cream); }
+.compare-col h3 { margin-bottom: 8px; }
+.compare-tagline { font-size: 14px; opacity: 0.7; margin-bottom: 20px; }
+.compare-list { list-style: none; }
+.compare-list li {
+  padding: 10px 0;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  font-size: 15px;
+  line-height: 1.55;
+}
+.compare-list li::before {
+  flex-shrink: 0;
+  width: 22px;
+  font-weight: 700;
+  margin-top: 1px;
+}
+.compare-bad .compare-list li::before { content: "✗"; color: var(--error); }
+.compare-good .compare-list li::before { content: "✓"; color: var(--terracotta); }
+
+/* ===== Identity shift ===== */
+.persona-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-top: 32px;
+}
+@media (max-width: 768px) {
+  .persona-grid { grid-template-columns: 1fr; }
+}
+.persona {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 28px;
+}
+.persona-title {
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--copper);
+  margin-bottom: 16px;
+}
+.persona-row {
+  padding: 12px 0;
+  border-top: 1px solid var(--border);
+  font-size: 15px;
+  line-height: 1.6;
+}
+.persona-row:first-of-type { border-top: none; padding-top: 0; }
+.persona-row strong { color: var(--charcoal); display: block; margin-bottom: 4px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.04em; }
+.persona-row.group2 strong { color: var(--copper); }
+
+/* ===== Capability stack ===== */
+.cap-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  margin-top: 32px;
+}
+@media (max-width: 1000px) {
+  .cap-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .cap-grid { grid-template-columns: 1fr; }
+}
+.cap-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 24px;
+  position: relative;
+}
+.cap-num {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--copper);
+  letter-spacing: 0.06em;
+  margin-bottom: 12px;
+}
+.cap-title { font-size: 17px; font-weight: 700; margin-bottom: 10px; }
+.cap-desc { font-size: 14px; line-height: 1.55; color: var(--charcoal-soft); }
+
+.cap-detail {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 28px 32px;
+  margin-bottom: 18px;
+}
+.cap-detail h3 {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.cap-detail h3 .cap-num-bubble {
+  width: 32px; height: 32px;
+  background: var(--copper);
+  color: white;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* ===== MCP grid (in capability 4) ===== */
+.mcp-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin-top: 18px;
+}
+@media (max-width: 768px) { .mcp-grid { grid-template-columns: 1fr; } }
+.mcp-cat {
+  background: var(--tan-light);
+  padding: 14px 16px;
+  border-radius: 10px;
+  border-left: 3px solid var(--copper);
+}
+.mcp-cat h4 {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--copper);
+  margin-bottom: 10px;
+}
+.mcp-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.mcp-tag {
+  background: var(--white);
+  color: var(--charcoal);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  border: 1px solid var(--border);
+}
+
+/* ===== Strategy block (in vision) ===== */
+.strategy-block {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 36px;
+  margin-top: 40px;
+}
+@media (max-width: 768px) { .strategy-block { padding: 24px; } }
+.strategy-tier {
+  display: flex;
+  gap: 18px;
+  padding: 22px 0;
+  border-top: 1px solid var(--border);
+}
+.strategy-tier:first-of-type { border-top: 1px solid var(--border); margin-top: 16px; }
+.strategy-tier-num {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  background: var(--copper);
+  color: white;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 18px;
+}
+.strategy-tier-content h4 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--charcoal);
+  margin-bottom: 10px;
+}
+.strategy-tier-content p { font-size: 16px; color: var(--charcoal-soft); margin-bottom: 12px; line-height: 1.65; }
+.strategy-tier-content ul { padding-left: 22px; margin: 12px 0; }
+.strategy-tier-content li { margin-bottom: 10px; line-height: 1.6; color: var(--charcoal-soft); }
+
+/* ===== Timeline (Mechanism) ===== */
+.timeline {
+  margin-top: 40px;
+  position: relative;
+}
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 23px;
+  top: 24px;
+  bottom: 24px;
+  width: 2px;
+  background: var(--border);
+}
+.t-item {
+  position: relative;
+  padding-left: 72px;
+  margin-bottom: 36px;
+}
+.t-item:last-child { margin-bottom: 0; }
+.t-bullet {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 48px;
+  height: 48px;
+  background: var(--copper);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 16px;
+  border: 4px solid var(--cream);
+  box-shadow: 0 0 0 1px var(--border);
+}
+.t-bullet.free { background: var(--success); }
+.t-bullet.support { background: var(--terracotta); }
+.t-item h3 { margin-bottom: 6px; }
+.t-meta {
+  display: inline-block;
+  font-size: 13px;
+  color: var(--copper);
+  font-weight: 600;
+  margin-bottom: 14px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.t-content { color: var(--charcoal-soft); font-size: 16px; }
+.t-content p { margin-bottom: 14px; }
+.t-content ul { padding-left: 22px; margin-bottom: 14px; }
+.t-content ul li { margin-bottom: 8px; line-height: 1.55; }
+.t-block-label {
+  display: block;
+  font-weight: 700;
+  color: var(--charcoal);
+  margin-top: 14px;
+  margin-bottom: 6px;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.t-result {
+  margin-top: 14px;
+  background: var(--tan-light);
+  padding: 14px 18px;
+  border-radius: 8px;
+  border-left: 3px solid var(--copper);
+  font-size: 15px;
+}
+
+/* ===== Skill examples (accordion) ===== */
+.skills-intro { margin-bottom: 24px; }
+.skill-cat {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+.skill-cat-header {
+  padding: 18px 24px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--charcoal);
+  user-select: none;
+  transition: background 0.15s;
+}
+.skill-cat-header:hover { background: var(--tan-light); }
+.skill-cat-header .toggle {
+  font-size: 24px;
+  color: var(--copper);
+  font-weight: 300;
+  transition: transform 0.2s;
+}
+.skill-cat.open .toggle { transform: rotate(45deg); }
+.skill-cat-body {
+  display: none;
+  padding: 0 24px 24px;
+}
+.skill-cat.open .skill-cat-body { display: block; }
+.skill-cat-body ul {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px 24px;
+}
+@media (max-width: 700px) { .skill-cat-body ul { grid-template-columns: 1fr; } }
+.skill-cat-body li {
+  padding: 6px 0;
+  font-size: 15px;
+  color: var(--charcoal-soft);
+  line-height: 1.5;
+  position: relative;
+  padding-left: 18px;
+}
+.skill-cat-body li::before {
+  content: "•";
+  color: var(--copper);
+  position: absolute;
+  left: 0;
+  font-weight: 700;
+}
+
+/* ===== Deliverables ===== */
+.deliv-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 40px;
+}
+@media (max-width: 768px) { .deliv-grid { grid-template-columns: 1fr; } }
+.deliv-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  gap: 16px;
+}
+.deliv-num {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  background: var(--copper);
+  color: white;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 15px;
+}
+.deliv-card.bonus .deliv-num { background: var(--terracotta); }
+.deliv-content h4 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: var(--charcoal);
+}
+.deliv-content p {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--charcoal-soft);
+  margin: 0;
+}
+.bonus-label {
+  display: inline-block;
+  background: var(--terracotta);
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.05em;
+  margin-bottom: 6px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+/* ===== Who for ===== */
+.whofor-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 32px;
+}
+@media (max-width: 768px) { .whofor-grid { grid-template-columns: 1fr; } }
+.whofor-col {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 28px;
+}
+.whofor-col h3 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+.whofor-col.fit h3 .icon { color: var(--success); }
+.whofor-col.notfit h3 .icon { color: var(--error); }
+.whofor-col ul {
+  list-style: none;
+}
+.whofor-col li {
+  padding: 12px 0;
+  border-top: 1px solid var(--border);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--charcoal-soft);
+}
+.whofor-col li:first-child { border-top: none; padding-top: 0; }
+.whofor-col li strong { color: var(--charcoal); }
+
+/* ===== About ===== */
+.about-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 40px;
+  margin-top: 24px;
+}
+@media (max-width: 768px) { .about-card { padding: 28px; } }
+.about-name {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--charcoal);
+  margin-bottom: 6px;
+}
+.about-tagline {
+  font-size: 16px;
+  color: var(--copper);
+  font-weight: 600;
+  margin-bottom: 28px;
+}
+.about-section h4 {
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--copper);
+  margin-top: 28px;
+  margin-bottom: 14px;
+}
+.brand-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+@media (max-width: 768px) { .brand-list { grid-template-columns: 1fr; } }
+.brand-item {
+  background: var(--tan-light);
+  padding: 16px;
+  border-radius: 10px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.brand-item strong {
+  display: block;
+  color: var(--charcoal);
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+.vendor-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.vendor-tag {
+  background: var(--tan);
+  color: var(--charcoal);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* ===== Pricing ===== */
+.pricing-card {
+  background: linear-gradient(180deg, var(--white) 0%, var(--tan-light) 100%);
+  border: 2px solid var(--copper);
+  border-radius: 20px;
+  padding: 48px;
+  margin-top: 24px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 4px 24px rgba(196, 112, 75, 0.08);
+}
+@media (max-width: 768px) { .pricing-card { padding: 32px 24px; } }
+.pricing-badge {
+  display: inline-block;
+  background: var(--copper);
+  color: white;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+.pricing-amount {
+  font-size: 64px;
+  font-weight: 800;
+  color: var(--charcoal);
+  letter-spacing: -0.02em;
+  margin-bottom: 4px;
+}
+@media (max-width: 768px) { .pricing-amount { font-size: 48px; } }
+.pricing-currency { font-size: 28px; vertical-align: top; color: var(--copper); }
+.pricing-sub { color: var(--charcoal-soft); margin-bottom: 32px; }
+.pricing-features {
+  text-align: left;
+  list-style: none;
+  max-width: 520px;
+  margin: 0 auto 32px;
+}
+.pricing-features li {
+  padding: 10px 0;
+  font-size: 15px;
+  line-height: 1.55;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.pricing-features li::before {
+  content: "✓";
+  color: var(--copper);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.pricing-note {
+  background: var(--tan-light);
+  padding: 18px;
+  border-radius: 10px;
+  font-size: 14px;
+  color: var(--charcoal-soft);
+  text-align: left;
+  margin-top: 24px;
+  line-height: 1.6;
+}
+.scarcity {
+  font-size: 14px;
+  color: var(--copper);
+  margin-top: 16px;
+  font-weight: 600;
+}
+
+/* ===== Refund ===== */
+.refund {
+  background: var(--charcoal);
+  color: var(--cream);
+  border-radius: 16px;
+  padding: 36px;
+}
+.refund h3 { color: var(--cream); margin-bottom: 16px; font-size: 22px; }
+.refund p { color: rgba(250, 246, 241, 0.85); }
+
+/* ===== FAQ ===== */
+.faq-item {
+  border-bottom: 1px solid var(--border);
+}
+.faq-q {
+  padding: 22px 0;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--charcoal);
+  user-select: none;
+}
+.faq-q .toggle {
+  flex-shrink: 0;
+  font-size: 24px;
+  color: var(--copper);
+  font-weight: 300;
+  transition: transform 0.2s;
+}
+.faq-item.open .faq-q .toggle { transform: rotate(45deg); }
+.faq-a {
+  display: none;
+  padding-bottom: 24px;
+  color: var(--charcoal-soft);
+  font-size: 16px;
+  line-height: 1.7;
+}
+.faq-item.open .faq-a { display: block; }
+.faq-a strong { color: var(--charcoal); }
+.faq-a ul { padding-left: 22px; margin: 12px 0; }
+.faq-a li { margin-bottom: 8px; }
+
+/* ===== Final CTA ===== */
+.final-cta {
+  background: linear-gradient(135deg, var(--copper) 0%, var(--terracotta) 100%);
+  color: white;
+  border-radius: 20px;
+  padding: 56px 40px;
+  text-align: center;
+  margin-top: 24px;
+}
+@media (max-width: 768px) { .final-cta { padding: 40px 24px; } }
+.final-cta h2 { color: white; }
+.final-cta p { color: rgba(255, 255, 255, 0.92); }
+.final-cta .btn {
+  background: white;
+  color: var(--copper);
+  margin-top: 24px;
+  font-size: 18px;
+  padding: 18px 40px;
+}
+.final-cta .btn:hover { background: var(--cream); }
+.qualify-list {
+  text-align: left;
+  max-width: 560px;
+  margin: 24px auto 0;
+  background: rgba(255, 255, 255, 0.12);
+  padding: 24px 28px;
+  border-radius: 12px;
+  font-size: 15px;
+  line-height: 1.7;
+}
+.qualify-list ol { padding-left: 22px; }
+.qualify-list li { margin-bottom: 6px; }
+
+/* ===== PS ===== */
+.ps {
+  border-top: 1px solid var(--border);
+  padding-top: 48px;
+  margin-top: 24px;
+  font-size: 17px;
+  line-height: 1.75;
+  color: var(--charcoal-soft);
+}
+.ps p:first-child { font-weight: 700; color: var(--charcoal); margin-bottom: 18px; }
+
+/* ===== Footer ===== */
+footer {
+  background: var(--charcoal);
+  color: rgba(250, 246, 241, 0.7);
+  padding: 36px 24px;
+  text-align: center;
+  font-size: 14px;
+}
+footer p { margin-bottom: 6px; }
+footer a { color: var(--terracotta); text-decoration: none; }
+
+/* ===== Anchor scroll offset ===== */
+[id] { scroll-margin-top: 80px; }
+
+/* ===== Section dividers ===== */
+.scroll-cue {
+  text-align: center;
+  margin-top: 32px;
+  font-size: 15px;
+  color: var(--charcoal-soft);
+  font-style: italic;
+}
+.scroll-cue a { color: var(--copper); text-decoration: none; font-weight: 600; }
+.scroll-cue a:hover { text-decoration: underline; }
+
+/* ===== Subtle fade-in ===== */
+.fade-in {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
+</head>
+<body>
+
+<div class="announcement">
+  Pilot batch đầu tiên: <strong>chỉ 20 suất</strong>. <a href="#cta-final" style="color: var(--cream); text-decoration: underline;">Book fit-check call</a>
+</div>
+
+<nav class="topbar">
+  <div class="nav-inner">
+    <a href="#top" class="brand">
+      <span class="brand-mark">C</span>
+      AI Marketing Co-Build 1:1
+    </a>
+    <ul class="nav-links">
+      <li><a href="#vision">Giá trị bạn nhận được</a></li>
+      <li><a href="#mechanism">Nội dung 5 buổi 1:1</a></li>
+      <li><a href="#pricing">Chi phí</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#cta-final" class="btn" style="padding: 10px 18px;">Book call</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ============== HERO ============== -->
+<section class="hero" id="top">
+  <div class="container hero-grid">
+    <div class="hero-text">
+      <h1>Học cách dùng Claude xây hệ thống AI marketing</h1>
+      <p class="hero-intro">Chương trình 1:1 đồng hành xây trên nền tảng Claude một hệ thống AI marketing cho use case cụ thể của bạn:</p>
+      <ul class="hero-bullets">
+        <li>Tự động hoá 80% quy trình marketing (content, quảng cáo, SEO, phân tích dữ liệu, nghiên cứu khách hàng, chiến lược)</li>
+        <li>AI hiểu và hỗ trợ đắc lực công việc cụ thể của bạn nhờ lớp ngữ cảnh riêng (brand voice, khách hàng, sản phẩm, đối thủ)</li>
+        <li>Kết nối Claude qua MCP với Meta Ads, GA4, Notion, NotebookLM, NanoBanana và 30+ công cụ khác để tạo nhiều workflow hiệu quả</li>
+        <li>Sở hữu vĩnh viễn kiến thức và kỹ năng, ứng dụng được cho mọi quy trình marketing của bạn</li>
+      </ul>
+      <p class="hero-closer">5 buổi triển khai 1:1 qua Google Meet, kèm 1 năm hỗ trợ qua Telegram.</p>
+      <a href="#cta-final" class="btn btn-large">Book fit-check call (miễn phí)</a>
+      <div class="hero-cta-meta">30 phút thấu hiểu giữa hai bên · không chốt sale</div>
+    </div>
+    <div class="hero-photo-wrapper">
+      <div class="hero-photo">
+        <img src="truyen-photo.jpg" alt="Truyen Nguyen, AI marketing system builder" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="hero-photo-placeholder" style="display:none;">Lưu ảnh chân dung tên <strong>truyen-photo.jpg</strong> vào cùng thư mục với file HTML để hiển thị</div>
+      </div>
+      <div class="hero-photo-caption">Truyền Nguyễn · 10 năm kinh nghiệm kết hợp marketing và tech tại các công ty Breadstack, Katalon, OPSWAT, Noventiq</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== AGITATION ============== -->
+<section class="alt-bg" id="agitation">
+  <div class="narrow">
+    <span class="section-label">Đây là điều ít ai nói thẳng</span>
+    <h2>Bạn đã học AI rồi nhưng vẫn chưa làm ra kết quả thật.</h2>
+    <div class="pain-list">
+      <p>Bạn mắc kẹt vì bạn đang dùng AI chưa đúng cách cho loại việc bạn đang làm.</p>
+      <p>Có hai cách dùng AI.</p>
+      <p>Cách thứ nhất: bạn đưa cho AI một prompt, AI trả về một kết quả, bạn dùng kết quả đó. Cách này hiệu quả cho task có đầu vào và đầu ra đơn giản, mà bạn không bận tâm quá trình ra sao. Như dịch văn bản. Format file. Tóm tắt báo cáo. Viết caption theo template có sẵn. Phần lớn người dạy AI marketing tại Việt Nam đang dạy bạn cách này.</p>
+      <p>Tuy nhiên marketing trong thực tế phức tạp hơn nhiều. Nó không có template fit sẵn. Dữ liệu đầu vào có nhiều biến số. Đặc điểm của khách hàng mục tiêu. Vấn đề của họ là gì. Brand voice của bạn nên như thế nào. Nội dung nào tạo ra sales. Nội dung nào chỉ build trust. Mỗi business sẽ ra một phiên bản khác nhau.</p>
+      <p>Khi bạn đem AI ra dùng thực tế theo cách paste prompt rồi nhận kết quả, AI sẽ trả về cái trung bình của dữ liệu nó được huấn luyện. Một đối tượng khách hàng chung chung trong 30 giây. Một bộ ad copy không khác gì 10 thương hiệu khác trong cùng ngách. Một content calendar đọc qua thấy hợp lý. </p>
+      <div class="callout">Tuy nhiên hợp lý không có nghĩa là đúng. AI có thể tâng bốc một ý tưởng trung bình để nghe có vẻ "tuyệt vời". Đây chính là cái bẫy cho marketer.</div>
+      <p>Lợi thế cạnh tranh trong marketing không nằm ở cái trung bình của thị trường. Nó nằm ở những góc nhìn riêng của bạn về sản phẩm, thứ mà chỉ người trong cuộc mới thấy được.</p>
+    </div>
+
+    <div style="margin-top: 56px;">
+      <h3 style="color: var(--copper); margin-bottom: 20px;">Vậy nên dùng AI thế nào để thoát bẫy output trung bình?</h3>
+      <p>Cái thật sự work là <strong>lớp ngữ cảnh</strong>.</p>
+      <p>Tools AI ai cũng có như nhau. Cùng một Claude. Cùng một ChatGPT. Cùng một bộ prompt đăng đầy trong các nhóm Facebook. Cái duy nhất không sao chép được là lớp ngữ cảnh mà AI biết về business cụ thể của bạn: định danh thương hiệu, khách hàng mục tiêu, brand voice, sản phẩm, đối thủ, bối cảnh tăng trưởng, lịch sử công việc, các quyết định đã đưa ra trước đây.</p>
+      <p>Bạn càng đầu tư vào lớp ngữ cảnh này, AI càng output sắc bén và tinh tế. Cùng một yêu cầu "viết caption Facebook về sản phẩm mới", AI không có ngữ cảnh sẽ ra một post chung chung. AI có ngữ cảnh sẽ tạo ra một post đúng tone, đúng nỗi đau khách hàng, đúng góc kể chuyện của thương hiệu.</p>
+      <p>Lớp ngữ cảnh này là lợi thế cạnh tranh thật của bạn trong thời đại AI. Tools đến rồi đi. Chỉ có lớp ngữ cảnh tích lũy theo thời gian.</p>
+    </div>
+
+    <div style="margin-top: 56px;">
+      <h3 style="color: var(--copper); margin-bottom: 20px;">Bạn cần chuyển vai</h3>
+      <p>Đây là lý do chương trình AI Marketing Co-Build 1:1 dạy bạn chuyển vai. Từ người dùng tools AI sang người kiến trúc hệ thống AI cho công việc marketing của bạn.</p>
+      <p>Trong 5 buổi 1:1 với mình, bạn xây lớp ngữ cảnh cho công việc của bạn. Bạn xây skill cho từng workflow lặp lại. Bạn xây agent cho từng nhiệm vụ marketing. Hệ thống này chạy ngầm, tự động hoá, mở rộng được theo công việc, áp dụng cho mọi nhu cầu marketing phát sinh sau này: từ content, quảng cáo, SEO, đến phân tích dữ liệu, nghiên cứu khách hàng, chiến lược thương hiệu.</p>
+      <div class="callout">Một hệ thống AI hiểu sâu về công việc của bạn sẽ giúp tự động hoá 80% workflow nhưng vẫn đảm bảo độ chính xác và hiệu quả như một nhân sự marketing giỏi thực thụ.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== 3 TRAPS ============== -->
+<section id="traps">
+  <div class="container">
+    <span class="section-label">3 cái bẫy</span>
+    <h2>3 cái bẫy hay gặp khi tự học AI marketing</h2>
+    <p class="lead">Mình thấy 3 kiểu thất bại lặp đi lặp lại với những người đang loay hoay với AI.</p>
+    <div class="card-grid grid-3">
+      <div class="card">
+        <div class="card-num">1</div>
+        <h3>Chạy theo tools</h3>
+        <p>Bạn học ChatGPT. Rồi Claude. Rồi Gemini. Rồi Midjourney. Rồi n8n, Make, Zapier.</p>
+        <p>Sau 6 tháng, bạn biết về 15 tool. Dùng đều mỗi tuần thì có 2-3 cái. Còn lại nằm trong thư mục "có thể sau này dùng tới".</p>
+        <p>Chạy theo tools làm bạn cảm thấy đang tiến bộ vì kiến thức tăng. Thực tế là bạn đang tích lũy thông tin chưa được áp dụng.</p>
+      </div>
+      <div class="card">
+        <div class="card-num">2</div>
+        <h3>Chạy theo prompt</h3>
+        <p>Bạn lưu mỗi ngày 5 prompt từ các nhóm Facebook AI. Bạn có thư mục "Prompt xịn" với 200 prompt.</p>
+        <p>Khi cần content, bạn vào thư mục, tìm prompt phù hợp, copy paste, đổi vài biến số. Kết quả ra. Lúc dùng được, lúc tệ. Bạn không hiểu vì sao.</p>
+        <p>Vấn đề là prompt được viết bởi người khác cho công việc của họ. Bạn không biết logic phía sau prompt nên không sửa được khi sai.</p>
+      </div>
+      <div class="card">
+        <div class="card-num">3</div>
+        <h3>Thiếu context</h3>
+        <p>Mỗi lần bạn mở phiên Claude mới, bạn phải giải thích lại công việc: bạn làm gì, khách hàng là ai, brand voice ra sao, sản phẩm gì.</p>
+        <p>Mất 10 phút mỗi lần. Sau phiên, mọi context biến mất. Hôm sau lặp lại.</p>
+        <p>Đây là lý do kết quả AI bạn nhận luôn chung chung. Bạn đang yêu cầu AI làm việc với mảnh ghép thiếu, mỗi lần một phiên bản khác.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== IDENTITY SHIFT ============== -->
+<section class="alt-bg" id="identity">
+  <div class="container">
+    <span class="section-label">5 năm tới</span>
+    <h2>Trong 5 năm tới, thị trường lao động sẽ chia thành 2 nhóm.</h2>
+    <p class="lead">Sự phân biệt 2 nhóm không phải họ biết bao nhiêu về AI. Mà là họ đã ngồi xuống áp dụng AI vào công việc thực tế ở mức độ nào.</p>
+
+    <div class="compare-grid">
+      <div class="compare-col compare-bad">
+        <h3>Nhóm 1</h3>
+        <p class="compare-tagline">Vẫn loay hoay với prompt và tool mới</p>
+        <ul class="compare-list">
+          <li>Copy paste prompt mỗi ngày, học tool mới mỗi tuần</li>
+          <li>Chưa thật sự có được AI workflow vận hành hiệu quả</li>
+          <li>Chưa scale được tốc độ sản xuất content, ads, research</li>
+          <li>Thậm chí mất nhiều thời gian hơn vì bội thực kiến thức về AI</li>
+        </ul>
+      </div>
+      <div class="compare-col compare-good">
+        <h3>Nhóm 2</h3>
+        <p class="compare-tagline">Đã xây hệ thống AI cho công việc cụ thể</p>
+        <ul class="compare-list">
+          <li>Có context system riêng cho business của họ</li>
+          <li>Có skill cá nhân hóa, workflow chạy ổn định</li>
+          <li>Chất lượng đầu ra chuẩn hoá, mở rộng được theo business</li>
+          <li>Đi từ người làm việc thủ công sang người thiết kế hệ thống</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="persona-grid">
+      <div class="persona">
+        <div class="persona-title">Freelancer / Chủ agency</div>
+        <div class="persona-row"><strong>Nhóm 1</strong>Cạnh tranh giá với hàng trăm freelancer khác. Thù lao giảm dần theo thời gian.</div>
+        <div class="persona-row group2"><strong>Nhóm 2</strong>Trở thành agency-of-one. Một người cùng đội AI quản lý 5-10 dự án cùng lúc. Bán dịch vụ giá cao.</div>
+      </div>
+      <div class="persona">
+        <div class="persona-title">Marketer in-house</div>
+        <div class="persona-row"><strong>Nhóm 1</strong>Khó tìm việc. Dễ bị thay thế bởi những nhân sự marketing biết vận dụng AI.</div>
+        <div class="persona-row group2"><strong>Nhóm 2</strong>Trở thành "người làm hệ thống AI marketing" của công ty. Người mà sếp luôn cần vì cả team đang dùng hệ thống do họ xây.</div>
+      </div>
+      <div class="persona">
+        <div class="persona-title">Founder / Chủ doanh nghiệp nhỏ</div>
+        <div class="persona-row"><strong>Nhóm 1</strong>Thuê thêm người làm những việc mà AI có thể làm thay. Chi phí vận hành tăng, lợi nhuận giảm.</div>
+        <div class="persona-row group2"><strong>Nhóm 2</strong>Chạy bộ máy marketing không cần thuê thêm. Mỗi đồng đầu tư có tỷ suất hoàn vốn rõ ràng.</div>
+      </div>
+      <div class="persona">
+        <div class="persona-title">Content creator</div>
+        <div class="persona-row"><strong>Nhóm 1</strong>Sử dụng AI để ra nhiều content hơn nhưng chất lượng đi xuống. Tương tác giảm.</div>
+        <div class="persona-row group2"><strong>Nhóm 2</strong>Nhân rộng quy trình sản xuất gấp 5 lần mà vẫn giữ chất lượng, vì đã có workflow đảm bảo brand voice nhất quán.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== VISION ============== -->
+<section id="vision">
+  <div class="container">
+    <span class="section-label">Bạn nhận được</span>
+    <h2>Sau 5 buổi Co-Build, bạn sẽ có một hệ thống AI Marketing hiệu quả cho công việc của bạn.</h2>
+    <p class="lead">Hệ thống được xây trên nền tảng Claude. Hình thái cụ thể tùy vào công việc của bạn.</p>
+
+    <div class="card-grid grid-2" style="margin-bottom: 56px;">
+      <div class="card">
+        <h3 style="font-size: 18px;">Cỗ máy nội dung tập trung</h3>
+        <p style="font-size: 15px; color: var(--charcoal-soft);">Dành cho creator hoặc freelancer tập trung vào content. 1-2 agent chuyên content, ra kết quả đều mỗi tuần đa kênh (Facebook, Zalo, blog SEO, email, Instagram).</p>
+      </div>
+      <div class="card">
+        <h3 style="font-size: 18px;">Bảng báo cáo dữ liệu marketing</h3>
+        <p style="font-size: 15px; color: var(--charcoal-soft);">Dành cho founder hoặc chủ doanh nghiệp nhỏ cần ra quyết định nhanh dựa trên dữ liệu. Kéo dữ liệu từ Meta Ads, Google Ads, GA4, tự tổng hợp báo cáo mỗi sáng thứ 2.</p>
+      </div>
+      <div class="card">
+        <h3 style="font-size: 18px;">Đội marketing đa-agent</h3>
+        <p style="font-size: 15px; color: var(--charcoal-soft);">Dành cho marketing manager hoặc agency. 4-7 agent chuyên biệt (content, design, research, analytics, strategy) phối hợp thông minh với nhau.</p>
+      </div>
+      <div class="card">
+        <h3 style="font-size: 18px;">Xây hệ thống Agentic AI cho khách hàng của bạn</h3>
+        <p style="font-size: 15px; color: var(--charcoal-soft);">Dành cho agency cần mở rộng vận hành. Skill template tái sử dụng cho nhiều khách hàng với context system riêng.</p>
+      </div>
+      <div class="card">
+        <h3 style="font-size: 18px;">Hệ thống vận hành marketing cho công ty</h3>
+        <p style="font-size: 15px; color: var(--charcoal-soft);">Dành cho marketer in-house muốn xây cho mình một hạ tầng không thể thay thế. Cả team dùng skill và agent do bạn xây.</p>
+      </div>
+      <div class="card" style="background: var(--charcoal); color: var(--cream); border-color: var(--charcoal);">
+        <h3 style="font-size: 18px; color: var(--cream);">Hình thái khác phù hợp với bạn</h3>
+        <p style="font-size: 15px; color: rgba(250, 246, 241, 0.8);">Trong buổi fit-check call, mình cùng bạn xác định hình thái hệ thống phù hợp nhất với công việc cụ thể của bạn.</p>
+      </div>
+    </div>
+
+    <h3 style="font-size: 26px; margin-bottom: 14px;">5 năng lực cốt lõi</h3>
+    <p style="margin-bottom: 32px; color: var(--charcoal-soft);">Chương trình AI Marketing Co-Build 1:1 xoay quanh 5 năng lực này. Đây là layer chung mà mọi hệ thống AI Marketing đều cần. Bạn sẽ xây hình thái nào hợp với công việc của bạn.</p>
+
+    <div class="cap-detail">
+      <h3><span class="cap-num-bubble">1</span>Context System</h3>
+      <p>File viết sẵn mô tả công việc của bạn (định danh, khách hàng mục tiêu, brand voice, định vị sản phẩm, bối cảnh tăng trưởng, các quy tắc content marketing). AI đọc trước mỗi phiên. Kết quả đầu ra của AI sẽ tối ưu theo công việc của bạn.</p>
+      <p>Đây là layer nền móng. Mọi năng lực khác xây trên đó. Không có context system, mọi skill bạn xây sẽ ra kết quả chung chung.</p>
+      <p><strong>Lớp ngữ cảnh tích lũy theo thời gian.</strong> Mỗi lần bạn nghiên cứu khách hàng mới, audit đối thủ, tổng hợp insight từ dữ liệu Meta Ads hay GA4, kết quả đó được đưa ngược về context system. Lần tới, AI sẽ hiểu công việc của bạn sâu hơn lần này. Đây là cơ chế tích lũy: lần nghiên cứu nào cũng làm cho lần nghiên cứu kế tiếp dễ hơn và sâu sắc hơn.</p>
+    </div>
+
+    <div class="cap-detail">
+      <h3><span class="cap-num-bubble">2</span>Skill Modular</h3>
+      <p>Workflow lặp lại được đóng gói thành skill có thể chạy lại. Xây một lần, dùng vĩnh viễn, mở rộng cùng công việc.</p>
+      <p>Skill = playbook chuẩn cho task lặp đi lặp lại. Ví dụ: "viết caption Facebook theo brand voice của tôi", "phân tích báo cáo Meta Ads tuần qua và chỉ ra 3 điểm cần xử lý", "audit landing page và đưa 5 đề xuất cải thiện CRO".</p>
+      <p>Bạn không cần prompt lại mỗi lần. Bạn gọi skill, AI biết phải làm gì, ra kết quả đúng định dạng bạn cần.</p>
+    </div>
+
+    <div class="cap-detail">
+      <h3><span class="cap-num-bubble">3</span>Agent Orchestration</h3>
+      <p>Đóng gói skill thành agent chuyên biệt. Xây logic điều phối tự động để AI tự chọn agent phù hợp khi nhận task.</p>
+      <p>Ví dụ: agent Content Creator của bạn có 5 skill (viết blog, viết caption, viết email, viết kịch bản video, viết broadcast). Khi bạn giao task "viết email kêu gọi hành động cho user mới đăng ký", AI tự chọn skill viết email, không cần bạn chỉ định.</p>
+      <p>Cấu trúc đa-agent giúp hệ thống mở rộng mà vẫn tập trung. Một phiên chat đơn lẻ với 30 skill sẽ rối. 5 agent với 6 skill mỗi agent thì có ranh giới rõ ràng.</p>
+    </div>
+
+    <div class="cap-detail">
+      <h3><span class="cap-num-bubble">4</span>Tự động hóa và Tích hợp Dữ liệu (qua MCP)</h3>
+      <p>Đây là layer biến Claude từ một chatbot biết viết thành <strong>agent điều khiển toàn bộ tech stack marketing của bạn</strong>. Cơ chế là MCP (Model Context Protocol), một chuẩn kết nối cho phép Claude đọc, ghi, gọi API tới các tool khác mà bạn đang dùng hàng ngày.</p>
+      <p>4 khuôn tự động hóa mà mọi hệ thống AI Marketing đều cần:</p>
+      <ul style="padding-left: 22px; margin-bottom: 18px;">
+        <li style="margin-bottom: 10px;"><strong>Task hẹn giờ.</strong> Báo cáo tự động kích hoạt 9h sáng thứ 2. Bạn không cần mở Claude và gõ "viết báo cáo tuần đi".</li>
+        <li style="margin-bottom: 10px;"><strong>Kết nối dữ liệu trực tiếp qua MCP.</strong> Meta Ads, Google Ads, GA4, Search Console, ... đưa dữ liệu thẳng vào hệ thống.</li>
+        <li style="margin-bottom: 10px;"><strong>Điều khiển từ xa.</strong> Trigger task từ điện thoại khi không có laptop. Đang ngồi cafe, ý tưởng pop up, gửi chỉ thị qua mobile.</li>
+        <li><strong>Human-in-the-Loop checkpoint.</strong> Bạn quyết định nơi đặt approval gate. Skill tự động soạn content, bạn approve trước khi publish. Skill tự động ngừng chi ngân sách Meta Ads khi ROAS giảm, bạn nhận thông báo trước khi action chạy. Chỗ đặt gate là quyết định thiết kế quan trọng.</li>
+      </ul>
+
+      <p style="margin-top: 22px;"><strong>Hệ sinh thái MCP bạn có thể kết nối</strong> (ví dụ một phần, scope tùy nhu cầu công việc của bạn):</p>
+
+      <div class="mcp-grid">
+        <div class="mcp-cat">
+          <h4>Dữ liệu marketing và sales</h4>
+          <div class="mcp-tags">
+            <span class="mcp-tag">Coupler.io</span><span class="mcp-tag">Meta Ads</span><span class="mcp-tag">Google Ads</span><span class="mcp-tag">GA4</span><span class="mcp-tag">Google Search Console</span><span class="mcp-tag">HubSpot</span><span class="mcp-tag">Mailchimp</span><span class="mcp-tag">Klaviyo</span><span class="mcp-tag">Amplitude</span><span class="mcp-tag">Similarweb</span>
+          </div>
+        </div>
+        <div class="mcp-cat">
+          <h4>Research và scraping</h4>
+          <div class="mcp-tags">
+            <span class="mcp-tag">Apify</span><span class="mcp-tag">Firecrawl</span><span class="mcp-tag">Perplexity</span><span class="mcp-tag">NotebookLM</span>
+          </div>
+        </div>
+        <div class="mcp-cat">
+          <h4>Visual và creative</h4>
+          <div class="mcp-tags">
+            <span class="mcp-tag">NanoBanana</span><span class="mcp-tag">Figma</span><span class="mcp-tag">Canva</span>
+          </div>
+        </div>
+        <div class="mcp-cat">
+          <h4>Workspace và lưu trữ</h4>
+          <div class="mcp-tags">
+            <span class="mcp-tag">Google Workspace</span><span class="mcp-tag">Notion</span><span class="mcp-tag">Microsoft 365</span><span class="mcp-tag">Airtable</span>
+          </div>
+        </div>
+        <div class="mcp-cat">
+          <h4>Publishing và web</h4>
+          <div class="mcp-tags">
+            <span class="mcp-tag">WordPress</span><span class="mcp-tag">Vercel</span><span class="mcp-tag">GitHub</span>
+          </div>
+        </div>
+        <div class="mcp-cat">
+          <h4>Giao tiếp và thông báo</h4>
+          <div class="mcp-tags">
+            <span class="mcp-tag">Slack</span><span class="mcp-tag">Telegram</span><span class="mcp-tag">Gmail</span>
+          </div>
+        </div>
+        <div class="mcp-cat">
+          <h4>Automation orchestration</h4>
+          <div class="mcp-tags">
+            <span class="mcp-tag">Make</span><span class="mcp-tag">n8n</span><span class="mcp-tag">Zapier</span>
+          </div>
+        </div>
+        <div class="mcp-cat">
+          <h4>AI extension (hệ sinh thái Anthropic)</h4>
+          <div class="mcp-tags">
+            <span class="mcp-tag">Claude Code</span><span class="mcp-tag">Claude Cowork</span><span class="mcp-tag">Claude Design</span>
+          </div>
+        </div>
+      </div>
+
+      <p style="margin-top: 22px;">Ví dụ: Khi bạn xây skill và agent trên Claude, bạn chỉ thị nó kéo data từ GA4, viết content theo brand voice, sáng tạo visual qua NanoBanana, đẩy lên WordPress, cập nhật task Notion, gửi thông báo qua Slack. Tất cả trong một workflow chạy ngầm. Không cần copy paste giữa các tool.</p>
+    </div>
+
+    <div class="cap-detail">
+      <h3><span class="cap-num-bubble">5</span>Trung tâm Điều khiển và Custom Tools (Vibe Coding)</h3>
+      <p>Bảng điều khiển quản lý task, theo dõi hiệu suất, kiểm soát toàn bộ hệ thống từ một chỗ. Có thể tích hợp bảng task Notion (giao task cho agent như giao cho team thật), bảng điều khiển tự thiết kế, hoặc giao diện trigger tự xây.</p>
+      <p><strong>Vibe Coding (xây custom tool không cần code):</strong></p>
+      <p>Phần thú vị của Claude và Claude Code là bạn xây được những tool nhỏ phục vụ marketing mà không có sản phẩm nào ngoài thị trường làm vừa ý:</p>
+      <ul style="padding-left: 22px; margin-bottom: 18px;">
+        <li style="margin-bottom: 8px;">Calculator tự thiết kế cho lead scoring, ROI forecasting, CAC payback</li>
+        <li style="margin-bottom: 8px;">Mini dashboard hiển thị KPI của riêng bạn theo cách bạn muốn</li>
+        <li style="margin-bottom: 8px;">Tool phân tích spreadsheet thô thành insight có cấu trúc</li>
+        <li style="margin-bottom: 8px;">Client deliverable tùy chỉnh (audit report, proposal generator, content scorecard)</li>
+        <li style="margin-bottom: 8px;">Internal tool cho team (review checklist, brief intake form)</li>
+        <li>Mini app xử lý workflow cụ thể (lead qualifier, quote calculator)</li>
+      </ul>
+      <p>Bạn miêu tả ý tưởng. AI viết code. Bạn chạy. Lặp lại tới khi tool work. Deploy lên GitHub hoặc Vercel để chia sẻ với team hoặc khách hàng (link clickable, không cần host server riêng).</p>
+    </div>
+
+    <div class="callout">5 năng lực này dùng được cho mọi model AI ra trong 5 năm tới. Tools thay đổi nhưng năng lực tích lũy theo thời gian.</div>
+
+    <div class="strategy-block">
+      <h3 style="margin-top: 8px; margin-bottom: 18px;">Đây không chỉ là chương trình hướng dẫn sử dụng công cụ AI</h3>
+      <p>Một sự thật ai làm marketing đủ lâu đều biết: công cụ đến rồi đi, chiến lược mới làm nên thành công lâu dài. Năm ngoái Make hot, năm nay n8n hot, sang năm có thể là một tên khác. Nhưng cách bạn định vị thương hiệu, cách bạn hiểu khách hàng, cách bạn ra quyết định khi đứng trước một campaign launch, những thứ đó tích lũy giá trị qua thời gian.</p>
+      <p>Co-Build đồng hành với bạn cả 3 tầng:</p>
+
+      <div class="strategy-tier">
+        <div class="strategy-tier-num">1</div>
+        <div class="strategy-tier-content">
+          <h4>Chiến lược marketing</h4>
+          <p>Cách bạn thiết kế brand voice nhất quán, định vị thông điệp khác biệt, dựng customer journey mạch lạc, ra quyết định channel mix dựa trên dữ liệu thật. Phần này mình đồng hành với bạn không chỉ như người dạy AI, mà như cố vấn chiến lược marketing. Vì 10 năm sản xuất content và document hệ thống software cho các công ty đã cho mình góc nhìn đó.</p>
+        </div>
+      </div>
+
+      <div class="strategy-tier">
+        <div class="strategy-tier-num">2</div>
+        <div class="strategy-tier-content">
+          <h4>Kỹ thuật AI: context engineering và harness engineering</h4>
+          <p>Hai khái niệm trung tâm của AI.</p>
+          <ul>
+            <li><strong>Context engineering</strong> là cách bạn cấu trúc dữ liệu nạp vào AI (ICP - Ideal Customer Profile, brand voice, product positioning, growth strategy) để AI hiểu công việc cụ thể của bạn, không trả về output trung bình.</li>
+            <li><strong>Harness engineering</strong> là cách bạn khoanh vùng giới hạn các công cụ AI thành một hệ thống sandbox (skill, agent, MCP, automation, command center). Đây là phần biến Claude từ "chatbot" thành "agent điều khiển toàn bộ tech stack marketing" hiệu quả và an toàn dữ liệu.</li>
+          </ul>
+          <p>Hai tầng kỹ thuật này quyết định AI làm việc cho bạn được tới đâu. Người chỉ biết prompt mà không biết context engineering hay harness engineering chỉ chạm 20% năng lực thật của AI.</p>
+        </div>
+      </div>
+
+      <div class="strategy-tier">
+        <div class="strategy-tier-num">3</div>
+        <div class="strategy-tier-content">
+          <h4>AI literacy: biết khi nào tin AI và khi nào không</h4>
+          <p>AI có giới hạn. Đôi khi nó "hallucinate" (ảo giác), sinh ra thông tin nghe hợp lý nhưng sai. Co-Build dạy bạn cách thẩm định output AI, hiểu rõ bản chất và năng lực và giới hạn của model, biết cách kiểm chứng và phản biện để không rơi vào bẫy ảo giác.</p>
+          <p>Phần này đặc biệt quan trọng khi AI viết content claim về sản phẩm, tổng hợp số liệu báo cáo, hoặc đưa recommendation chiến lược. Sai một phần nhỏ, hậu quả với thương hiệu là khôn lường.</p>
+        </div>
+      </div>
+
+      <p style="margin-top: 24px;">Khi cả 3 tầng làm việc cùng nhau, kết quả không phải chỉ là "AI làm content nhanh hơn gấp đôi". Kết quả là một hệ thống marketing chạy ngầm giúp bạn <strong>tăng doanh số, tăng nhận diện thương hiệu, giữ chân khách hàng tốt hơn</strong>, vì nó được xây dựng trên chiến lược đúng, kỹ thuật đúng, và nhận thức đúng.</p>
+      <p>Cú chuyển mình Co-Build hỗ trợ: từ người làm marketing thủ công sang <strong>kiến trúc sư hệ thống AI marketing kiêm cố vấn chiến lược</strong>. Bạn không chỉ làm task nhanh hơn. Bạn ra quyết định tốt hơn.</p>
+    </div>
+
+    <div class="scroll-cue">
+      <a href="#mechanism">Tôi muốn xây hệ thống của riêng tôi. Cho tôi xem 5 buổi 1:1 ↓</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============== MECHANISM ============== -->
+<section class="alt-bg" id="mechanism">
+  <div class="container">
+    <span class="section-label">Cách triển khai</span>
+    <h2>5 buổi 1:1 với mình diễn ra như thế nào</h2>
+    <p class="lead">Triết lý cấu trúc: mỗi buổi build cấu trúc folder và dùng chính use case của bạn để học. Sau đó tự áp dụng quy trình tương tự cho mọi use case khác. Buổi cuối cùng review và lập lộ trình sau chương trình.</p>
+
+    <div class="timeline">
+      <div class="t-item">
+        <div class="t-bullet free">0</div>
+        <h3>Buổi 0: Fit-check call</h3>
+        <span class="t-meta">30 phút · MIỄN PHÍ · mở cho mọi người</span>
+        <div class="t-content">
+          <p>Đây là buổi mở cho bất kỳ ai. Bạn chưa cần đóng phí gì.</p>
+          <p>Trong buổi này, mình tìm hiểu công việc của bạn, nghe về 3 nút thắt đang ngốn nhiều thời gian nhất trong marketing. Cuối buổi, cả 2 phía quyết định có phù hợp để đi tiếp không. Nếu phù hợp, bạn ghi danh vào chương trình. Nếu không hợp, mình gợi ý hướng khác.</p>
+        </div>
+      </div>
+
+      <div class="t-item">
+        <div class="t-bullet">1</div>
+        <h3>Buổi 1: Nền móng AI · Thiết lập Context System</h3>
+        <span class="t-meta">90 phút</span>
+        <div class="t-content">
+          <span class="t-block-label">Chủ đề</span>
+          <p>Cách xây context system, nền móng của mọi AI workflow.</p>
+          <span class="t-block-label">Hoạt động trong buổi</span>
+          <ul>
+            <li>Thiết lập Claude Project / Code mới cho công việc của bạn</li>
+            <li>Xây context system 5-7 file markdown: công ty, khách hàng mục tiêu, brand voice, định vịsản phẩm, bối cảnh tăng trưởng, quy tắc marketing</li>
+            <li>Kiểm thử context system bằng skill đầu tiên (chọn theo nút thắt #1 từ buổi fit-check)</li>
+          </ul>
+          <div class="t-result"><strong>Kết quả sau buổi 1:</strong> Context system đã chạy, skill #1 đã xây, bạn hiểu cách viết context cho công việc của bạn.</div>
+        </div>
+      </div>
+
+      <div class="t-item">
+        <div class="t-bullet">2</div>
+        <h3>Buổi 2: Xây Skill và "AI hoá" quy trình</h3>
+        <span class="t-meta">90 phút</span>
+        <div class="t-content">
+          <span class="t-block-label">Chủ đề</span>
+          <p>Cấu trúc 1 skill chuẩn, cách thiết kế file SKILL.md, đầu vào / đầu ra, vòng lặp cải tiến, cách xây skill dựa trên ví dụ tham chiếu.</p>
+          <span class="t-block-label">Use case ví dụ (thực tế sẽ dựa theo case riêng của bạn)</span>
+          <ul>
+            <li><strong>Cỗ máy nội dung.</strong> Skill viết Facebook posts, Instagram posts, Zalo broadcast, blog SEO, chuỗi email</li>
+            <li><strong>Marketing Intelligence.</strong> Skill nghiên cứu đối thủ, tổng hợp interview khách hàng, theo dõi xu hướng</li>
+            <li><strong>Luồng tạo Ad Creative.</strong> Skill ra creative brief và copy cho Meta Ads / TikTok Ads</li>
+            <li><strong>Cỗ máy SEO.</strong> Skill nhóm từ khóa, content brief, tối ưu cho AI search</li>
+            <li><strong>Cỗ máy Báo cáo.</strong> Skill báo cáo hàng tuần đa channel và chỉ ra insight</li>
+            <li><strong>Landing page và Sales Funnel.</strong> Skill thiết kế structure landing page, viết copy headline / section / CTA, dựng sales funnel đầy đủ từ lead magnet đến offer</li>
+          </ul>
+          <div class="t-result"><strong>Kết quả sau buổi 2:</strong> 1-2 skill mới, bạn hiểu cách tự xây skill cho task lặp lại bất kỳ.</div>
+        </div>
+      </div>
+
+      <div class="t-item">
+        <div class="t-bullet">3</div>
+        <h3>Buổi 3: Xây Agent và Phối hợp Đa-skill</h3>
+        <span class="t-meta">90 phút</span>
+        <div class="t-content">
+          <span class="t-block-label">Chủ đề</span>
+          <p>Cách đóng gói skill thành agent chuyên biệt, cấu hình routing logic trong CLAUDE.md, cách AI tự chọn agent khi nhận task, cách thiết kế ranh giới agent với skill.</p>
+          <span class="t-block-label">Use case ví dụ (THỰC TẾ SẼ DỰA THEO CASE RIÊNG CỦA BẠN)</span>
+          <ul>
+            <li>Agent Content Creator cho creator / freelancer</li>
+            <li>Agent Market Researcher cho founder / marketing manager</li>
+            <li>Agent Campaign Strategist cho agency</li>
+            <li>Agent Data Analyst cho founder hoặc chủ doanh nghiệp nhỏ cần báo cáo</li>
+            <li>Agent Creative Designer cho team chạy ads</li>
+          </ul>
+          <div class="t-result"><strong>Kết quả sau buổi 3:</strong> 1 agent đã xây, bạn hiểu cách thiết kế cấu trúc đa-agent cho công việc của bạn.</div>
+        </div>
+      </div>
+
+      <div class="t-item">
+        <div class="t-bullet">4</div>
+        <h3>Buổi 4: Tự động hóa, Trung tâm Điều khiển và MCP</h3>
+        <span class="t-meta">90 phút</span>
+        <div class="t-content">
+          <span class="t-block-label">Chủ đề</span>
+          <p>Kết nối dữ liệu trực tiếp qua MCP, setup task hẹn giờ, thiết kế Human-in-the-Loop checkpoint, xây bảng điều khiển, điều khiển từ xa qua mobile, tool decision framework (khi nào dùng Claude, Claude Code, Claude Cowork, Claude Design).</p>
+          <span class="t-block-label">Use case ví dụ (thực tế sẽ dựa theo case riêng của bạn)</span>
+          <ul>
+            <li>Kết nối MCP cho data sources (Coupler.io kéo dữ liệu Meta Ads / Google Ads / GA4, hoặc kết nối trực tiếp HubSpot / GSC / Notion / Google Workspace)</li>
+            <li>Setup task hẹn giờ (báo cáo hàng tuần auto-fire 9h sáng thứ 2, gửi qua Telegram hoặc email)</li>
+            <li>Xây bảng task Notion cho agent của bạn (giao task như giao cho team thật)</li>
+            <li>Setup điều khiển từ xa, trigger task từ điện thoại</li>
+            <li>Xây bảng điều khiển tùy chỉnh theo dõi hiệu suất AI marketing</li>
+            <li>Vibe coding: dựng custom tool nhỏ (calculator, checklist tool, mini dashboard) deploy GitHub / Vercel</li>
+          </ul>
+          <div class="t-result"><strong>Kết quả sau buổi 4:</strong> Hệ thống tự động hóa được khởi tạo, bảng điều khiển hoạt động, các MCP integration đã connect, bạn hiểu cách vận hành toàn bộ hệ thống và quyết định khi nào can thiệp thủ công (Human-in-the-Loop).</div>
+        </div>
+      </div>
+
+      <div class="t-item">
+        <div class="t-bullet">5</div>
+        <h3>Buổi 5: Review, Tối ưu và Lập Lộ trình</h3>
+        <span class="t-meta">90 phút</span>
+        <div class="t-content">
+          <span class="t-block-label">Chủ đề</span>
+          <p>Cách audit hệ thống AI marketing của bạn sau khi đã chạy. Tìm gap, friction point, chỗ cần tối ưu. Lập lộ trình cho giai đoạn tự xây tiếp theo.</p>
+          <span class="t-block-label">Hoạt động trong buổi</span>
+          <ul>
+            <li>Review từng layer hệ thống đã xây qua 4 buổi trước (context system, skill, agent, automation, command center)</li>
+            <li>Test end-to-end workflow với một use case marketing thật của bạn</li>
+            <li>Tìm bottleneck, tinh chỉnh skill / agent / context cho mượt hơn</li>
+            <li>Document operational playbook (cheatsheet để bạn nhớ cách vận hành sau chương trình)</li>
+            <li>Lập lộ trình 30/60/90 ngày tự xây sau chương trình: skill nào xây tiếp, agent nào bổ sung, MCP nào kết nối thêm</li>
+          </ul>
+          <div class="t-result"><strong>Kết quả sau buổi 5:</strong> Hệ thống đã được audit và tối ưu, bạn có lộ trình rõ ràng cho giai đoạn tự xây. Bạn rời chương trình với hệ thống chạy mượt và biết chính xác bước tiếp theo.</div>
+        </div>
+      </div>
+
+      <div class="t-item">
+        <div class="t-bullet support">∞</div>
+        <h3>Giai đoạn tự xây · 1 năm hỗ trợ</h3>
+        <span class="t-meta">Telegram + bookable call</span>
+        <div class="t-content">
+          <p>Sau 5 buổi xây, bạn đã có hiểu biết vận hành đủ để tự xây skill và agent mới cho mọi nhu cầu marketing phát sinh. Bạn không phụ thuộc mình.</p>
+          <p>Khi vướng mắc (kết quả không như ý, skill cần điều chỉnh, hệ thống có lỗi):</p>
+          <ul>
+            <li><strong>Hỗ trợ Telegram</strong> trong 1 năm. Ping mình bất cứ lúc nào trong khung giờ làm việc, mình reply trong 24 giờ.</li>
+            <li><strong>Book call hỗ trợ</strong> khi vướng phức tạp cần debug trực tiếp. Đặt lịch hẹn trước với mình.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== SKILL EXAMPLES ============== -->
+<section id="skills">
+  <div class="container">
+    <span class="section-label">Bạn xây được gì</span>
+    <h2>Ví dụ 70+ skills bạn có thể xây sau khi xong 5 buổi</h2>
+    <p class="lead skills-intro">Sau khi đồng hành 1:1 (buổi 2 dạy skill, buổi 3 dạy agent, buổi 4 dạy MCP và automation), bạn xây được skill cho mọi nhu cầu, không chỉ giới hạn ở danh sách này. Click vào từng nhóm để xem ví dụ.</p>
+
+    <div class="skill-cat">
+      <div class="skill-cat-header" onclick="toggleSkill(this)">Sản xuất nội dung <span class="toggle">+</span></div>
+      <div class="skill-cat-body">
+        <ul>
+          <li>Viết blog SEO (long-form, viết cho cả Google và AI search)</li>
+          <li>Cỗ máy social post (Facebook, Instagram, Zalo, LinkedIn, Threads)</li>
+          <li>Xây newsletter email</li>
+          <li>Viết broadcast Telegram</li>
+          <li>Viết kịch bản video (TikTok, YouTube Shorts, Reels)</li>
+          <li>Tạo show notes cho podcast</li>
+          <li>Tạo lead magnet (PDF hướng dẫn, template, checklist)</li>
+          <li>Viết case study từ transcript phỏng vấn thô</li>
+          <li>Viết press release</li>
+          <li>Tạo dàn ý slide cho webinar</li>
+          <li>Viết internal newsletter</li>
+          <li>Tạo bài LinkedIn theo phong cách thought leadership</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="skill-cat">
+      <div class="skill-cat-header" onclick="toggleSkill(this)">Paid Ads và Creative <span class="toggle">+</span></div>
+      <div class="skill-cat-body">
+        <ul>
+          <li>Creative brief cho Meta Ads (visual, copy, targeting)</li>
+          <li>Tạo Google Ads RSA (15 headlines và 4 descriptions)</li>
+          <li>Viết kịch bản TikTok Ads</li>
+          <li>Viết copy LinkedIn Ads</li>
+          <li>Brief thiết kế carousel (cấu trúc 10 slide và gợi ý visual)</li>
+          <li>Tạo copy landing page</li>
+          <li>Tạo biến thể cho A/B test</li>
+          <li>Skill làm mới ad creative (tạo biến thể mới từ ad winner)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="skill-cat">
+      <div class="skill-cat-header" onclick="toggleSkill(this)">Nghiên cứu và Intelligence <span class="toggle">+</span></div>
+      <div class="skill-cat-body">
+        <ul>
+          <li>Theo dõi đối thủ (auto-scrape 3-5 đối thủ hàng tuần)</li>
+          <li>Tổng hợp interview khách hàng (transcript ra insight)</li>
+          <li>Phân tích phản hồi survey (định lượng và định tính)</li>
+          <li>Xây hồ sơ ICP</li>
+          <li>Báo cáo xu hướng theo ngành</li>
+          <li>Quét review và phân tích sentiment</li>
+          <li>Theo dõi nhắc tới brand</li>
+          <li>Phân tích quy mô thị trường</li>
+          <li>Theo dõi giá đối thủ</li>
+          <li>Bản tin ngành hàng tuần</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="skill-cat">
+      <div class="skill-cat-header" onclick="toggleSkill(this)">Search Engine Optimization và Generative Engine Optimization <span class="toggle">+</span></div>
+      <div class="skill-cat-body">
+        <ul>
+          <li>Phân tích cụm từ khóa (1000+ keyword ra cluster chủ đề)</li>
+          <li>Tạo content brief (dàn ý chuẩn SEO, entities, FAQ)</li>
+          <li>Audit on-page SEO</li>
+          <li>Đề xuất internal linking</li>
+          <li>Audit AI Search Visibility (phân tích citation trên ChatGPT, Perplexity, Claude)</li>
+          <li>Tạo schema markup</li>
+          <li>Phân tích SERP</li>
+          <li>Phân tích content gap so với đối thủ</li>
+          <li>Bản đồ topical authority</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="skill-cat">
+      <div class="skill-cat-header" onclick="toggleSkill(this)">Analytics và Báo cáo <span class="toggle">+</span></div>
+      <div class="skill-cat-body">
+        <ul>
+          <li>Báo cáo hiệu suất Facebook Ads hàng tuần</li>
+          <li>Báo cáo Google Ads hàng tuần kèm insight</li>
+          <li>Báo cáo phân tích traffic GA4</li>
+          <li>Phân tích phễu chuyển đổi</li>
+          <li>Phân tích attribution theo channel</li>
+          <li>Phân tích cohort khách hàng</li>
+          <li>Mô hình dự báo ROAS</li>
+          <li>Xây bảng điều khiển marketing</li>
+          <li>Báo cáo tốc độ pipeline</li>
+          <li>Phân tích LTV khách hàng</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="skill-cat">
+      <div class="skill-cat-header" onclick="toggleSkill(this)">Email và CRM <span class="toggle">+</span></div>
+      <div class="skill-cat-body">
+        <ul>
+          <li>Xây chuỗi email chào mừng (5-7 email)</li>
+          <li>Chuỗi tái kích hoạt</li>
+          <li>Chuỗi cart abandonment (cho e-commerce)</li>
+          <li>Tạo chiến dịch nhỏ giọt</li>
+          <li>Tạo rule cho lead scoring</li>
+          <li>Biến thể subject line A/B</li>
+          <li>Curation nội dung newsletter</li>
+          <li>Skill phân nhóm khách hàng</li>
+          <li>Cỗ máy token cá nhân hóa</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="skill-cat">
+      <div class="skill-cat-header" onclick="toggleSkill(this)">Social và Cộng đồng <span class="toggle">+</span></div>
+      <div class="skill-cat-body">
+        <ul>
+          <li>Tạo phản hồi comment (theo brand)</li>
+          <li>Mẫu phản hồi DM</li>
+          <li>Moderate post cộng đồng</li>
+          <li>Tạo lịch nội dung hàng tháng</li>
+          <li>Nghiên cứu hashtag</li>
+          <li>Mẫu outreach influencer</li>
+          <li>Skill repurpose UGC</li>
+          <li>Tạo ý tưởng post tương tác (cho group hoặc cộng đồng)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="skill-cat">
+      <div class="skill-cat-header" onclick="toggleSkill(this)">Sales và Conversion <span class="toggle">+</span></div>
+      <div class="skill-cat-body">
+        <ul>
+          <li>Tạo dàn ý sales deck</li>
+          <li>Tạo one-pager</li>
+          <li>Viết case study từ phỏng vấn khách hàng</li>
+          <li>Chuỗi sales email</li>
+          <li>Tạo template proposal</li>
+          <li>Tổng hợp note discovery call</li>
+          <li>Thư viện xử lý phản đối</li>
+          <li>Cỗ máy cá nhân hóa cold outreach</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="skill-cat">
+      <div class="skill-cat-header" onclick="toggleSkill(this)">Landing Page, Website và Funnel <span class="toggle">+</span></div>
+      <div class="skill-cat-body">
+        <ul>
+          <li>Brief thiết kế landing page (structure, headline hierarchy, CTA placement)</li>
+          <li>Viết copy đầy đủ cho sales page dài (hero, agitation, vision, mechanism, pricing, CTA)</li>
+          <li>Wireframe website (sitemap, content hierarchy, page templates)</li>
+          <li>Thiết kế sales funnel đầy đủ (lead magnet → nurture sequence → offer → upsell)</li>
+          <li>Webinar funnel design (registration → live → replay → offer)</li>
+          <li>Email funnel design (welcome → engagement → conversion)</li>
+          <li>Audit landing page conversion (friction detection, CTA hierarchy, copy clarity)</li>
+          <li>Brief thiết kế trên Webflow / Framer / Notion site</li>
+          <li>A/B test plan cho landing page</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="skill-cat">
+      <div class="skill-cat-header" onclick="toggleSkill(this)">Custom Tools và Vibe Coding <span class="toggle">+</span></div>
+      <div class="skill-cat-body">
+        <ul>
+          <li>Calculator marketing (ROI, LTV, CAC, lead score, ROAS payback)</li>
+          <li>Mini dashboard tracking KPI riêng của bạn</li>
+          <li>Tool phân tích spreadsheet thô ra insight có cấu trúc</li>
+          <li>Audit checklist tool (landing page, content, brand, SEO)</li>
+          <li>Content scorecard tool (brand voice consistency, SEO score, readability)</li>
+          <li>Custom proposal generator</li>
+          <li>Client onboarding form tự thiết kế</li>
+          <li>Brief intake form cho team / khách hàng</li>
+          <li>Mini app workflow cụ thể (lead qualifier, quote calculator)</li>
+          <li>Deploy lên GitHub Pages hoặc Vercel để chia sẻ</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="skill-cat">
+      <div class="skill-cat-header" onclick="toggleSkill(this)">Vận hành và Workflow <span class="toggle">+</span></div>
+      <div class="skill-cat-body">
+        <ul>
+          <li>Viết SOP marketing</li>
+          <li>Tạo brief dự án</li>
+          <li>Tổng hợp meeting và action items</li>
+          <li>Template content brief</li>
+          <li>Báo cáo post-mortem chiến dịch</li>
+          <li>Báo cáo trạng thái team</li>
+          <li>Tạo kế hoạch marketing quý</li>
+          <li>Đề xuất phân bổ nguồn lực</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="skill-cat">
+      <div class="skill-cat-header" onclick="toggleSkill(this)">Product Marketing, Launch và Brand Positioning <span class="toggle">+</span></div>
+      <div class="skill-cat-body">
+        <ul>
+          <li>Kế hoạch GTM (go-to-market) cho launch sản phẩm</li>
+          <li>Copy thông báo tính năng</li>
+          <li>Format changelog</li>
+          <li>Email mời user thử nghiệm beta</li>
+          <li>Tổng hợp phản hồi NPS</li>
+          <li>Brief positioning sản phẩm</li>
+          <li>Trích xuất brand voice (từ content có sẵn)</li>
+          <li>Xây framework brand message</li>
+          <li>Brainstorm tên product</li>
+          <li>Tạo tagline kèm lý giải</li>
+          <li>Kiểm tra tính nhất quán tone & voice</li>
+          <li>Audit brand đa kênh</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============== DELIVERABLES ============== -->
+<section class="alt-bg" id="deliverables">
+  <div class="container">
+    <span class="section-label">Đầy đủ trong chương trình</span>
+    <h2>Bạn nhận được giá trị gì</h2>
+
+    <h3 style="margin-top: 32px; margin-bottom: 18px; font-size: 20px;">Hạng mục chính</h3>
+    <div class="deliv-grid">
+      <div class="deliv-card">
+        <div class="deliv-num">1</div>
+        <div class="deliv-content">
+          <h4>Buổi 0 fit-check (MIỄN PHÍ, 30 phút)</h4>
+          <p>Trước khi quyết định, ngồi nói chuyện 30 phút để biết có phù hợp không.</p>
+        </div>
+      </div>
+      <div class="deliv-card">
+        <div class="deliv-num">2</div>
+        <div class="deliv-content">
+          <h4>5 buổi 1:1 Co-Build (90 phút mỗi buổi)</h4>
+          <p>Setup, 3 buổi xây và 1 buổi review với mình qua Google Meet. Tổng 7.5 tiếng co-build 1:1.</p>
+        </div>
+      </div>
+      <div class="deliv-card">
+        <div class="deliv-num">3</div>
+        <div class="deliv-content">
+          <h4>Context system riêng cho công việc của bạn</h4>
+          <p>5-7 file markdown viết trong các buổi co-build. Bạn sở hữu vĩnh viễn. Dùng cho mọi tool AI tương lai. Xây một lần, tái sử dụng vĩnh viễn.</p>
+        </div>
+      </div>
+      <div class="deliv-card">
+        <div class="deliv-num">4</div>
+        <div class="deliv-content">
+          <h4>Hệ thống AI Marketing khởi tạo</h4>
+          <p>Skill và agent đã xây trong co-build, đang chạy thật cho công việc của bạn. Bạn rời chương trình với hệ thống deploy ngay được.</p>
+        </div>
+      </div>
+      <div class="deliv-card">
+        <div class="deliv-num">5</div>
+        <div class="deliv-content">
+          <h4>Hiểu biết vận hành để tự xây</h4>
+          <p>Sau 5 buổi, bạn hiểu cách tự xây skill và agent mới cho mọi nhu cầu marketing phát sinh sau này. Cộng lộ trình 30/60/90 ngày tự xây cụ thể.</p>
+        </div>
+      </div>
+      <div class="deliv-card">
+        <div class="deliv-num">6</div>
+        <div class="deliv-content">
+          <h4>1 năm hỗ trợ Telegram và bookable call</h4>
+          <p>Vướng mắc khi tự xây, ping mình. Vướng phức tạp cần debug trực tiếp, book call. Trong 12 tháng kể từ buổi 5.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="margin-top: 48px; margin-bottom: 18px; font-size: 20px;">Bonus stack (đóng gói riêng cho học viên Co-Build)</h3>
+    <div class="deliv-grid">
+      <div class="deliv-card bonus">
+        <div class="deliv-num">1</div>
+        <div class="deliv-content">
+          <h4><span class="bonus-label">Bonus</span>Thư viện 50+ skill template AI marketing</h4>
+          <p>Skill xây sẵn cho từng mô hình kinh doanh (D2C, B2C, B2B, e-commerce, SaaS, education, F&B, dịch vụ chuyên môn). Bạn tham khảo, copy, điều chỉnh cho công việc của bạn.</p>
+        </div>
+      </div>
+      <div class="deliv-card bonus">
+        <div class="deliv-num">2</div>
+        <div class="deliv-content">
+          <h4><span class="bonus-label">Bonus</span>Thư viện 30+ workflow template</h4>
+          <p>Workflow chuẩn cho báo cáo hàng tuần, kế hoạch nội dung, ad creative brief, tổng hợp customer research.</p>
+        </div>
+      </div>
+      <div class="deliv-card bonus">
+        <div class="deliv-num">3</div>
+        <div class="deliv-content">
+          <h4><span class="bonus-label">Bonus</span>Brand Message Framework</h4>
+          <p>Module dạy cách trích xuất và format brand message để đưa vào context system. Brand voice rõ hơn, kết quả AI thật hơn.</p>
+        </div>
+      </div>
+      <div class="deliv-card bonus">
+        <div class="deliv-num">4</div>
+        <div class="deliv-content">
+          <h4><span class="bonus-label">Bonus</span>Workshop SEO và AI Search Visibility</h4>
+          <p>Pre-recorded. Cách tối ưu nội dung cho cả Google search và AI search engine (ChatGPT, Perplexity, Claude, Gemini).</p>
+        </div>
+      </div>
+      <div class="deliv-card bonus">
+        <div class="deliv-num">5</div>
+        <div class="deliv-content">
+          <h4><span class="bonus-label">Bonus</span>Series video onboarding</h4>
+          <p>3-5 video, 10-15 phút mỗi video, pre-recorded. Setup Claude Project, cấu trúc context system, Skill và Agent, kết nối MCP.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top: 32px;">Bạn kết thúc 5 buổi với một hệ thống AI Marketing ứng dụng thực tế cho use case của bạn, sở hữu vĩnh viễn, mở rộng được khi phát triển kinh doanh, kèm 1 năm hỗ trợ khi cần.</div>
+
+    <div class="scroll-cue"><a href="#pricing">Đăng ký vào batch đầu ↓</a></div>
+  </div>
+</section>
+
+<!-- ============== WHO FOR ============== -->
+<section id="whofor">
+  <div class="container">
+    <span class="section-label">Đối tượng phù hợp</span>
+    <h2>Chương trình Co-Build dành cho ai?</h2>
+
+    <div class="whofor-grid">
+      <div class="whofor-col fit">
+        <h3><span class="icon">✓</span>Phù hợp với bạn nếu</h3>
+        <ul>
+          <li>Bạn làm marketing cho ai đó. Cho công việc của bạn (founder hoặc chủ doanh nghiệp nhỏ), cho công ty bạn làm (marketer in-house), cho khách hàng (freelancer hoặc chủ agency), hoặc cho chính bạn (content creator).</li>
+          <li>Bạn muốn xây hệ thống AI marketing có thể nhân rộng quy mô.</li>
+          <li>Bạn sẵn sàng dành 90 phút mỗi buổi co-build (5 buổi tổng) kèm 1-2 giờ mỗi tuần tự thực hành giữa các buổi.</li>
+          <li>Bạn ở <strong>bất kỳ trình độ nào</strong> với AI. Từ người mới chưa từng dùng, đến người đã xây workflow phức tạp. Vì 1:1 cá nhân hóa, mình điều chỉnh tốc độ và độ sâu theo trình độ của bạn. Mỗi học viên có một lộ trình riêng.</li>
+        </ul>
+      </div>
+      <div class="whofor-col notfit">
+        <h3><span class="icon">✗</span>Chưa phải lúc cho bạn nếu</h3>
+        <ul>
+          <li>Bạn muốn done-for-you. Bạn đưa brief, người khác làm hết, bạn nhận kết quả. Đây là mô hình <strong>done-WITH-you.</strong> Bạn xây cùng mình, mình hướng dẫn từng bước qua Google Meet.</li>
+          <li>Bạn muốn AI sẽ tự kiếm tiền cho bạn mà không cần ngồi xây. Co-Build là giai đoạn xây dựng. Kết quả tích lũy theo thời gian khi bạn dùng skill 3-6 tháng đều.</li>
+          <li>Bạn không muốn chạm vào tech ở mức cơ bản (mở file markdown, chỉnh prompt, click vài setting). Co-Build không khó. Bạn cần sẵn sàng nhìn vào file và config.</li>
+        </ul>
+      </div>
+    </div>
+
+    <p style="margin-top: 32px; text-align: center; color: var(--charcoal-soft);">Nếu sau khi đọc xong bạn vẫn chưa chắc, đăng ký buổi fit-check 30 phút <strong>MIỄN PHÍ</strong>. Mình nói thẳng phù hợp hay không.</p>
+  </div>
+</section>
+
+<!-- ============== ABOUT ============== -->
+<section class="alt-bg" id="about">
+  <div class="container">
+    <span class="section-label">Giới thiệu</span>
+    <h2>Mình là ai</h2>
+
+    <div class="about-card">
+      <div class="about-name">Truyền Nguyễn</div>
+      <div class="about-tagline">10 năm làm product và marketing cho các công ty công nghệ ở Mỹ, Canada, Anh</div>
+
+      <div class="about-section">
+        <h4>Brand mình đã làm full-time</h4>
+        <div class="brand-list">
+          <div class="brand-item">
+            <strong>Breadstack</strong> (Vancouver, Canada)<br>
+            eCommerce SaaS từng đoạt giải, platform xử lý 289K+ đơn hàng và 21 triệu đô doanh thu.
+          </div>
+          <div class="brand-item">
+            <strong>Katalon</strong> (Georgia, US)<br>
+            Quality management platform phục vụ 100K+ users trên 30K+ teams.
+          </div>
+          <div class="brand-item">
+            <strong>OPSWAT</strong> (Florida, US)<br>
+            Công ty an ninh mạng. Nội dung giáo dục của mình đã đào tạo 256K học viên và developer trên toàn cầu.
+          </div>
+          <div class="brand-item">
+            <strong>Noventiq</strong> (London, UK)<br>
+            Công ty trị giá hơn 1 tỷ đô. Là một Microsoft Marketing Partner. Mình sản xuất 52 content marketing asset mỗi tháng cho 3 thị trường (Việt Nam, Cambodia, Myanmar).
+          </div>
+        </div>
+      </div>
+
+      <div class="about-section">
+        <h4>Vendor partner mình đã làm marketing cho</h4>
+        <div class="vendor-tags">
+          <span class="vendor-tag">Microsoft</span>
+          <span class="vendor-tag">Cloudflare</span>
+          <span class="vendor-tag">Check Point</span>
+          <span class="vendor-tag">Fortinet</span>
+          <span class="vendor-tag">AWS</span>
+        </div>
+      </div>
+
+      <div class="about-section">
+        <h4>Học vấn</h4>
+        <p style="font-size: 15px;">Computer Science, ĐH Khoa học Tự nhiên TPHCM.</p>
+      </div>
+
+      <div class="about-section">
+        <h4>Tại sao background này khác biệt?</h4>
+        <p>Phần lớn người dạy AI marketing tại Việt Nam thuộc 1 trong 2 nhóm: marketer thuần (giỏi digital marketing, nhưng không xây được hệ thống technical AI), hoặc dev thuần (xây được hệ thống, nhưng không hiểu marketing).</p>
+        <p>Mình là điểm giao giữa marketer và developer.</p>
+        <p>Có nền tảng Computer Science. 10 năm document hệ thống tech phức tạp (eCommerce platform, QA platform, hạ tầng an ninh mạng) thành tài liệu rõ ràng cho dev, product manager, customer team đọc và hiểu được.</p>
+        <p>Cùng lúc, 10 năm trực tiếp sản xuất marketing content cho các công ty D2C, B2C, B2B, e-commerce, SaaS, education, F&B,...</p>
+        <p>Khi mình xây context system, skill, agent cho học viên Co-Build, mình áp dụng chính trải nghiệm mình đã làm 10 năm: biến workflow đời thực rời rạc thành hệ thống có cấu trúc, có document, lặp lại được. Đó chính là cái AI cần để chạy ổn định.</p>
+      </div>
+
+      <div class="about-section">
+        <h4>Định vị của mình</h4>
+        <p>Người cùng bạn xây hệ thống. Mình không phải chuyên gia AI biết hết mọi thứ. Mình là người đã ngồi đủ lâu với AI để biết cái nào dùng được, cái nào chỉ là demo. Mình test, sai, điều chỉnh, share lại cái đã chạy.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== PRICING ============== -->
+<section id="pricing">
+  <div class="container">
+    <span class="section-label">Chi phí</span>
+    <h2 style="text-align: center; margin: 0 auto 16px;">Pilot batch đầu tiên</h2>
+    <p class="lead" style="text-align: center; margin: 0 auto 32px;">Đây là batch đầu tiên của AI Marketing Co-Build 1:1. Sau batch này, batch tiếp theo giá sẽ tăng. Giá pilot chỉ có lần này.</p>
+
+    <div class="pricing-card">
+      <div class="pricing-badge">Pilot batch · chỉ lần này</div>
+      <div class="pricing-amount"><span class="pricing-currency">₫</span>997.000</div>
+      <div class="pricing-sub">cho toàn bộ chương trình</div>
+
+      <ul class="pricing-features">
+        <li>1 buổi fit-check 30 phút (MIỄN PHÍ, trước khi quyết định)</li>
+        <li>5 buổi cowork 90 phút mỗi buổi (Setup, 3 buổi xây, 1 buổi review)</li>
+        <li>Context system riêng cho công việc của bạn (sở hữu vĩnh viễn)</li>
+        <li>Hệ thống AI Marketing khởi tạo theo use case thực tế</li>
+        <li>Hiểu biết vận hành để tự xây skill và agent mới</li>
+        <li>Lộ trình 30/60/90 ngày tự xây sau chương trình</li>
+        <li>1 năm hỗ trợ qua Telegram và bookable call</li>
+        <li>5 bonus stack (50+ skill template, 30+ workflow template, Brand Message Framework, Workshop SEO và AI Search, series video onboarding)</li>
+      </ul>
+
+      <a href="#cta-final" class="btn btn-large">Book fit-check call (miễn phí)</a>
+      <div class="scarcity">Còn [PLACEHOLDER: số suất] / 20 · đóng batch khi đủ 20 học viên</div>
+
+      <div class="pricing-note">
+        <strong>Lý do giá pilot này:</strong> Mình muốn cùng học viên batch đầu xây case study thật từ công việc cụ thể của họ.
+      </div>
+    </div>
+
+    <div class="refund" style="margin-top: 40px;">
+      <h3>Chính sách hoàn tiền</h3>
+      <p>Sau buổi đầu tiên (Buổi 1: Setup context system và skill #1), nếu bạn cảm thấy Co-Build không đúng cái bạn cần, mình hoàn tiền 100%. Không hỏi lý do.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============== FAQ ============== -->
+<section class="alt-bg" id="faq">
+  <div class="narrow">
+    <span class="section-label">FAQ</span>
+    <h2>Trả lời các câu hỏi về chương trình</h2>
+
+    <div style="margin-top: 32px;">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">"Tại sao co-build 1:1 chuyên sâu này lại tốt hơn khóa online hay group training?" <span class="toggle">+</span></div>
+        <div class="faq-a">
+          <p>Khóa online và group training có giá trị riêng, đặc biệt cho người mới muốn nắm cái nhìn tổng quan. Nhưng khi áp dụng cho công việc marketing thật của bạn, có 3 vấn đề tự nhiên không tránh được.</p>
+          <p><strong>Bạn phải học cả phần không cần.</strong> Một khóa nhóm thiết kế cho cả lớp, nên giảng viên phải dạy những thứ đa số học viên cần, kể cả phần không liên quan đến nút thắt cụ thể của bạn. Bạn ngồi qua 2-3 tiếng cho nội dung không áp dụng được vào công việc của mình.</p>
+          <p><strong>Bạn bị giới hạn bởi tốc độ trung bình.</strong> Khóa nhóm phải đi theo tốc độ chung của lớp. Bạn nắm nhanh thì phải đợi cả lớp theo kịp. Bạn cần đào sâu một chỗ nhưng giảng viên không thể đi đến tận cùng của vấn đề vì để giữ tiến độ của cả lớp.</p>
+          <p><strong>Kết quả không khớp công việc của bạn.</strong> Skill và workflow trong khóa nhóm thường được thiết kế trên ví dụ chung (kiểu "công ty SaaS X giả định"). Khi bạn về áp dụng cho công việc thật của bạn, vẫn phải tự custom lại, và đa số mắc kẹt ở đoạn đó.</p>
+          <p>Co-Build customize theo workflow thật bạn đang làm. Brand voice của bạn. Khách hàng của bạn. Sản phẩm của bạn. Đối thủ thật của bạn. Skill và agent xây trong cowork chạy ngay được trên dữ liệu thật của công việc bạn, không phải trên case study giả định. Sau 5 buổi bạn không cần "tự áp dụng lại lần nữa", vì hệ thống đã được áp dụng cho bạn từ buổi 1.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">"Tôi học AI miễn phí trên YouTube được mà, đúng không?" <span class="toggle">+</span></div>
+        <div class="faq-a">
+          <p>Đúng. Kiến thức AI giờ miễn phí khắp nơi. Mình khuyên bạn học YouTube nếu bạn đang ở giai đoạn nền tảng.</p>
+          <p>Cái bạn trả tiền cho Co-Build là <strong>có người đồng hành riêng 1:1 để xây AI workflow cho use case cụ thể của bạn</strong>. YouTube dạy bạn về lý thuyết và ý tưởng. Co-Build là cùng bạn thực hành thiết kế context system, skill, agent cho công việc của riêng bạn. Không kênh YouTube nào dạy phần này được, vì nó cần ngồi cùng công việc cụ thể.</p>
+          <p>Một mình mò 6 tháng để xây hệ thống so với Co-Build 5 buổi để có hệ thống chạy được kèm 1 năm hỗ trợ. Bạn tự tính giá trị 6 tháng đó với công việc của bạn.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">"Tôi chưa từng dùng AI tool nào, theo nổi không?" <span class="toggle">+</span></div>
+        <div class="faq-a">
+          <p>Có. Co-Build là 1:1 cá nhân hóa. Mình điều chỉnh tốc độ theo trình độ của bạn.</p>
+          <p>Người mới vẫn theo được vì:</p>
+          <ul>
+            <li>Có series video onboarding cơ bản (xem trước buổi 1)</li>
+            <li>Buổi 1 setup mình hướng dẫn từng bước, không bỏ qua phần cơ bản</li>
+            <li>Bạn chỉ cần biết công việc của bạn, sau đó sẽ cùng nhau triển khai</li>
+          </ul>
+          <p>Đây là lợi thế của 1:1 so với khóa nhóm. Khóa nhóm phải giả định baseline chung của cả lớp. Co-Build cá nhân hóa theo bạn.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">"Tôi không rành tech, có theo được không?" <span class="toggle">+</span></div>
+        <div class="faq-a">
+          <p>Co-Build là done-WITH-you. Hai bên cùng triển khai. Bạn không cần biết code. Bạn chỉ cần biết rõ công việc của bạn và sẵn sàng nhìn vào file markdown (giống nhìn vào file Word).</p>
+          <p>Học viên target chính là marketer, không phải developer. Marketer là người hiểu khách hàng, brand, copy. Đó là đầu vào của Co-Build. Technical là phần mình hỗ trợ.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">"AI thay đổi quá nhanh, học hôm nay mai có lỗi thời không?" <span class="toggle">+</span></div>
+        <div class="faq-a">
+          <p>Tools thay đổi. Năng lực tích lũy.</p>
+          <p>Co-Build dạy bạn 5 năng lực dùng được cho mọi model AI ra trong 5 năm tới: xây context system, thiết kế skill modular, phối hợp agent, tự động hóa và kết nối dữ liệu, xây trung tâm điều khiển. Khi Claude ra phiên bản mới, hay khi GPT-7 ra, bạn vẫn áp dụng nguyên framework.</p>
+          <p>Học AI mà cứ đuổi theo tool mới là chạy mãi không tới. Học năng lực cốt lõi mới thoát ra khỏi vòng lặp đó.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">"Tôi đã mua khóa AI khác rồi, có cần Co-Build nữa không?" <span class="toggle">+</span></div>
+        <div class="faq-a">
+          <p>Khóa học là tiếp nhận thụ động (xem video, ghi note). Co-Build là chủ động xây dựng (xây cùng nhau, deploy ngay trong buổi, kết quả chạy thật cho công việc của bạn). Hai loại bổ sung cho nhau.</p>
+          <p>Bạn đã có kiến thức từ khóa học. Co-Build là chỗ bạn biến kiến thức thành hệ thống chạy được cho công việc của bạn.</p>
+          <p>Nếu bạn đã có khóa và chưa áp dụng được sau 3 tháng, đó là dấu hiệu bạn cần Co-Build.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">"Mình là agency, có thể áp dụng skill xây được cho khách hàng không?" <span class="toggle">+</span></div>
+        <div class="faq-a">
+          <p>Có. Mình rất khuyến khích.</p>
+          <p>Skill bạn xây trong Co-Build cho công việc của bạn, bạn tái sử dụng cho khách hàng. Một skill xây tốt = nhiều khách hàng dùng được. ROI của Co-Build với agency là cao nhất trong các nhóm.</p>
+          <p><strong>Lưu ý:</strong> Co-Build xây cho 1 công việc cụ thể (công việc của bạn hoặc 1 khách hàng cụ thể). Nếu bạn có 5 khách hàng với 5 công việc khác nhau, bạn cần 5 context system khác nhau. Skill thì có thể tái sử dụng.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== FINAL CTA ============== -->
+<section id="cta-final">
+  <div class="container">
+    <span class="section-label">Quyết định</span>
+    <h2>Batch đầu tiên: tối đa 20 học viên</h2>
+    <p class="lead">Vì bản chất 1:1 chuyên sâu nên số suất có giới hạn. Khi đủ 20, đóng batch. Batch tiếp theo dự kiến mở [PLACEHOLDER: date], giá sẽ tăng lên [PLACEHOLDER: TBD].</p>
+
+    <div class="card-grid grid-2" style="margin-bottom: 32px;">
+      <div class="card">
+        <strong style="display: block; color: var(--copper); font-size: 14px; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 6px;">Enrollment</strong>
+        <p style="margin: 0; font-size: 15px;">Mở: [PLACEHOLDER]<br>Đóng: [PLACEHOLDER hoặc khi đủ 20]</p>
+      </div>
+      <div class="card">
+        <strong style="display: block; color: var(--copper); font-size: 14px; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 6px;">Batch</strong>
+        <p style="margin: 0; font-size: 15px;">Start: [PLACEHOLDER]<br>End: [PLACEHOLDER]</p>
+      </div>
+    </div>
+
+    <div class="final-cta">
+      <h2 style="font-size: 32px;">Book fit-check call (miễn phí)</h2>
+      <p>30 phút qua Google Meet. Không chốt sale. Cả 2 phía quyết định có phù hợp đi tiếp không.</p>
+      <a href="[PLACEHOLDER: Calendly URL]" class="btn btn-large">Book fit-check call →</a>
+
+      <div class="qualify-list">
+        <strong style="display: block; margin-bottom: 12px;">Trước call, bạn fill 5 câu trong Calendly questions:</strong>
+        <ol>
+          <li>Tên + email + Telegram username</li>
+          <li>Bạn đang làm marketing cho ai?</li>
+          <li>Nút thắt lớn nhất hiện tại trong AI workflow của bạn là gì?</li>
+          <li>Trình độ hiện tại với AI?</li>
+          <li>Bạn cam kết được 90 phút mỗi buổi cowork (5 buổi tổng) kèm 1-2 giờ mỗi tuần tự thực hành?</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="ps">
+      <p>P.S. Quay lại vấn đề ban đầu mình nói.</p>
+      <p>Kiến thức về AI giờ miễn phí khắp YouTube. Khả năng vận dụng Claude AI vào công việc marketing cụ thể của bạn mới là thứ khan hiếm và đáng tiền.</p>
+      <p>Trong 5 năm tới, người đứng vững là người đã ngồi xuống và làm phần áp dụng đó.</p>
+      <p>AI Marketing Co-Build 1:1 là nơi để bạn có người cùng ngồi lại để làm phần áp dụng đó.</p>
+      <p style="margin-top: 18px;"><a href="#cta-final" style="color: var(--copper); font-weight: 600; text-decoration: none;">Book fit-check call ↑</a></p>
+    </div>
+  </div>
+</section>
+
+<button id="scroll-top" aria-label="Lên đầu trang" title="Lên đầu trang">↑</button>
+
+<footer>
+  <p><strong style="color: var(--cream);">AI Marketing Co-Build 1:1</strong> · bởi Truyen Nguyen</p>
+  <p>Liên hệ: <a href="mailto:truyennguyendavis@gmail.com">truyennguyendavis@gmail.com</a></p>
+  <p style="margin-top: 12px; opacity: 0.6;">© 2026. Pilot batch chương trình. Sản phẩm độc lập, không liên kết với Anthropic.</p>
+</footer>
+
+<script>
+function toggleFaq(el) {
+  el.parentElement.classList.toggle('open');
+}
+function toggleSkill(el) {
+  el.parentElement.classList.toggle('open');
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Open first FAQ by default
+  var firstFaq = document.querySelector('.faq-item');
+  if (firstFaq) firstFaq.classList.add('open');
+
+  // Scroll-to-top button visibility
+  var scrollBtn = document.getElementById('scroll-top');
+  if (scrollBtn) {
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 400) {
+        scrollBtn.classList.add('visible');
+      } else {
+        scrollBtn.classList.remove('visible');
+      }
+    });
+    scrollBtn.addEventListener('click', function() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+});
+
+// Subtle fade-in on scroll
+if ('IntersectionObserver' in window) {
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0, rootMargin: '0px 0px -10% 0px' });
+  document.querySelectorAll('section').forEach(function(s) {
+    s.classList.add('fade-in');
+    observer.observe(s);
+  });
+  // Safety fallback: after 3 seconds, ensure all sections are visible
+  // (covers edge cases where IO fails to fire on very tall sections or specific mobile browsers)
+  setTimeout(function() {
+    document.querySelectorAll('section.fade-in:not(.visible)').forEach(function(s) {
+      s.classList.add('visible');
+    });
+  }, 3000);
+} else {
+  // Old browser fallback: skip animation, show everything
+  document.querySelectorAll('section').forEach(function(s) {
+    s.classList.add('fade-in', 'visible');
+  });
+}
+</script>
+
+</body>
+</html>
